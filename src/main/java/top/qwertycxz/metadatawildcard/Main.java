@@ -10,6 +10,11 @@ import java.io.IOException;
 
 import net.fabricmc.api.DedicatedServerModInitializer;
 
+/**
+ * A fabric-permissions-api addon, allowing using wildcards in metadata.
+ *
+ * @see me.lucko.fabric.api.permissions.v0.Options
+ */
 public class Main implements DedicatedServerModInitializer {
 	public void onInitializeServer() {
 		var configDirectory = getInstance().getConfigDir().resolve("MetadataWildcard4fabric-permissions-api");

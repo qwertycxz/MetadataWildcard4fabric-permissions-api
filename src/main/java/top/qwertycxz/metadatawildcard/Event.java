@@ -12,8 +12,22 @@ import me.lucko.fabric.api.permissions.v0.OfflineOptionRequestEvent;
 import me.lucko.fabric.api.permissions.v0.OptionRequestEvent;
 import net.minecraft.resources.ResourceLocation;
 
+/**
+ * Register recursive lookup to online and offline option request event.
+ *
+ * @see OptionRequestEvent
+ * @see OfflineOptionRequestEvent
+ */
 class Event {
+	/**
+	 * A phase after default phase.
+	 *
+	 * @see net.fabricmc.fabric.api.event.Event#DEFAULT_PHASE
+	 */
 	static final ResourceLocation WILDCARD_PHASE = tryParse("metadatawildcard4fabric-permissions-api");
+	/**
+	 * Only look up metadata with these prefixes.
+	 */
 	final Set<String> prefixStrings;
 
 	Event(Set<String> prefixStrings) {
@@ -30,6 +44,12 @@ class Event {
 		});
 	}
 
+	/**
+	 * If this metadata should be empty.
+	 *
+	 * @param key key of metadata
+	 * @return {@code true} for empty, and {@code false} for recursion continues
+	 */
 	boolean isEmpty(String key) {
 		return key.equals("*") || prefixStrings.parallelStream().noneMatch(prefix -> key.startsWith(prefix));
 	}
