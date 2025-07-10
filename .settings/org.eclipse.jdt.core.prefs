@@ -62,3 +62,4 @@ org.eclipse.jdt.core.formatter.parentheses_positions_in_method_invocation=separa
 org.eclipse.jdt.core.formatter.parentheses_positions_in_record_declaration=separate_lines_if_wrapped
 org.eclipse.jdt.core.formatter.parentheses_positions_in_try_clause=separate_lines_if_wrapped
 org.eclipse.jdt.core.formatter.put_empty_statement_on_new_line=false
+org.eclipse.jdt.core.formatter.text_block_indentation=3
