@@ -1,30 +1,33 @@
 package top.qwertycxz.metadatawildcard;
 
-import static java.util.Optional.empty;
-import static java.util.concurrent.CompletableFuture.completedFuture;
-import static me.lucko.fabric.api.permissions.v0.Options.get;
-import static net.fabricmc.fabric.api.event.Event.DEFAULT_PHASE;
-import static net.minecraft.resources.ResourceLocation.tryParse;
-import me.lucko.fabric.api.permissions.v0.OfflineOptionRequestEvent;
-import me.lucko.fabric.api.permissions.v0.OptionRequestEvent;
+import static java.nio.file.Files.createDirectories;
+import static java.nio.file.Files.lines;
+import static java.nio.file.Files.writeString;
+import static java.util.stream.Collectors.toSet;
+import static net.fabricmc.loader.api.FabricLoader.getInstance;
+
+import java.io.IOException;
+
 import net.fabricmc.api.DedicatedServerModInitializer;
-import net.minecraft.resources.ResourceLocation;
 
 public class Main implements DedicatedServerModInitializer {
-	static final ResourceLocation WILDCARD_PHASE = tryParse("metadatawildcard4fabric-permissions-api");
-
-	static {
-		OfflineOptionRequestEvent.EVENT.addPhaseOrdering(DEFAULT_PHASE, WILDCARD_PHASE);
-		OfflineOptionRequestEvent.EVENT.register(WILDCARD_PHASE, (uuid, key) -> {
-			if (key.equals("*")) return completedFuture(empty());
-			return get(uuid, key.replaceAll("[^\\.]+\\.?\\*?\\z", "*"));
-		});
-		OptionRequestEvent.EVENT.addPhaseOrdering(DEFAULT_PHASE, WILDCARD_PHASE);
-		OptionRequestEvent.EVENT.register(WILDCARD_PHASE, (source, key) -> {
-			if (key.equals("*")) return empty();
-			return get(source, key.replaceAll("[^\\.]+\\.?\\*?\\z", "*"));
-		});
+	public void onInitializeServer() {
+		var configDirectory = getInstance().getConfigDir().resolve("MetadataWildcard4fabric-permissions-api");
+		var prefixConfig = configDirectory.resolve("prefix.txt");
+		try {
+			try {
+				prefixConfig.toRealPath();
+			}
+			catch (IOException e) {
+				createDirectories(configDirectory);
+				writeString(prefixConfig, """
+				minecraft.selector
+				""");
+			}
+			new Event(lines(prefixConfig).parallel().collect(toSet()));
+		}
+		catch (IOException e) {
+			throw new RuntimeException("Failed to load config file for mod Metadata Wildcard for fabric-permissions-api");
+		}
 	}
-
-	public void onInitializeServer() {}
 }
