@@ -13,7 +13,7 @@ import net.minecraft.resources.ResourceLocation;
 public class Main implements DedicatedServerModInitializer {
 	static final ResourceLocation WILDCARD_PHASE = tryParse("metadatawildcard4fabric-permissions-api");
 
-	public void onInitializeServer() {
+	static {
 		OfflineOptionRequestEvent.EVENT.addPhaseOrdering(DEFAULT_PHASE, WILDCARD_PHASE);
 		OfflineOptionRequestEvent.EVENT.register(WILDCARD_PHASE, (uuid, key) -> {
 			if (key.equals("*")) return completedFuture(empty());
@@ -25,4 +25,6 @@ public class Main implements DedicatedServerModInitializer {
 			return get(source, key.replaceAll("[^\\.]+\\.?\\*?\\z", "*"));
 		});
 	}
+
+	public void onInitializeServer() {}
 }
