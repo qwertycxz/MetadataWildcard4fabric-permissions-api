@@ -1,0 +1,11 @@
+plugins {
+	id 'fabric-loom' version '1.11-SNAPSHOT'
+}
+
+dependencies {
+	mappings loom.officialMojangMappings()
+	minecraft 'com.mojang:minecraft:1.21.7'
+	modImplementation 'me.lucko:fabric-permissions-api:0.4.1'
+	modImplementation 'net.fabricmc:fabric-loader:0.16.14'
+	modImplementation fabricApi.module('fabric-api-base', '0.128.2+1.21.7')
+}
