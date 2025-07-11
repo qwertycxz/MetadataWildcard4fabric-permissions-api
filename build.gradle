@@ -9,3 +9,24 @@ dependencies {
 	modImplementation 'net.fabricmc:fabric-loader:0.16.14'
 	modImplementation fabricApi.module('fabric-api-base', '0.128.2+1.21.7')
 }
+
+loom {
+	decompilers {
+		cfr {
+			memory = 1024
+		}
+	}
+	runs {
+		server {
+			vmArgs '-Xmx1G'
+		}
+	}
+	serverOnlyMinecraftJar()
+}
+
+tasks.withType(JavaCompile).configureEach {
+	options.deprecation = true
+	options.encoding = 'UTF-8'
+	options.listFiles = true
+	options.release = 15
+}

@@ -21,7 +21,7 @@
 	"description": "A fabric-permissions-api addon, allowing using wildcards in metadata.",
 	"entrypoints": {
 		"server": [
-			"top.qwertycxz.metadatawildcard.Main"
+			"top.qwertycxz.metadatawildcard.MetadataWildcard"
 		]
 	},
 	"environment": "server",
