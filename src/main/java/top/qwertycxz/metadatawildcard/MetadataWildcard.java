@@ -43,7 +43,16 @@ public class MetadataWildcard implements DedicatedServerModInitializer {
 	/**
 	 * A phase after default phase.
 	 */
-	static final ResourceLocation WILDCARD_PHASE = tryParse("metadatawildcard4fabric-permissions-api");
+	static final ResourceLocation WILDCARD_PHASE = tryParse("$id");
+	/**
+	 * <p>
+	 * {@code foo.bar.baz.qux} -> {@code qux}
+	 * </p>
+	 * <p>
+	 * {@code foo.bar.baz.*} -> {@code baz.*}
+	 * </p>
+	 */
+	static final String regex = "[^\\.]+\\.?\\*?\\z";
 	/**
 	 * Only look up metadata with these prefixes.
 	 */
@@ -53,12 +62,12 @@ public class MetadataWildcard implements DedicatedServerModInitializer {
 		OfflineOptionRequestEvent.EVENT.addPhaseOrdering(DEFAULT_PHASE, WILDCARD_PHASE);
 		OfflineOptionRequestEvent.EVENT.register(WILDCARD_PHASE, (uuid, key) -> {
 			if (isEmpty(key)) return completedFuture(empty());
-			return get(uuid, key.replaceAll("[^\\.]+\\.?\\*?\\z", "*"));
+			return get(uuid, key.replaceAll(regex, "*"));
 		});
 		OptionRequestEvent.EVENT.addPhaseOrdering(DEFAULT_PHASE, WILDCARD_PHASE);
 		OptionRequestEvent.EVENT.register(WILDCARD_PHASE, (source, key) -> {
 			if (isEmpty(key)) return empty();
-			return get(source, key.replaceAll("[^\\.]+\\.?\\*?\\z", "*"));
+			return get(source, key.replaceAll(regex, "*"));
 		});
 	}
 
