@@ -17,45 +17,25 @@ import me.lucko.fabric.api.permissions.v0.OptionRequestEvent;
 import net.fabricmc.api.DedicatedServerModInitializer;
 import net.minecraft.resources.ResourceLocation;
 
-/**
- * An addon for fabric-permissions-api that enables wildcard support in metadata.
- * <p>
- * <h3>Example</h3>
- *
- * <pre>
- * MetadataWildcard.prefixStrings.add("foo.bar");
- * </pre>
- *
- * When checking a key like {@code foo.bar.baz.qux}:
- * <ol>
- * <li>First checks for an exact match</li>
- * <li>If not found, checks parent keys with wildcards in descending order:
- * <ul>
- * <li>{@code foo.bar.baz.*}</li>
- * <li>{@code foo.bar.*}</li>
- * </ul>
- * </li>
- * <li>Returns unset if no match is found</li>
- * </ol>
- * </p>
- */
+/// An addon for fabric-permissions-api that enables wildcard support in metadata.
+/// # Example
+/// ```java
+/// MetadataWildcard.prefixStrings.add("foo.bar");
+/// ```
+/// When checking a key like `foo.bar.baz.qux`:
+/// 1. First checks for an exact match
+/// 2. If not found, checks parent keys with wildcards in descending order:
+///     * `foo.bar.baz.*`
+///     * `foo.bar.*`
+/// 3. Returns unset if no match is found
 public class MetadataWildcard implements DedicatedServerModInitializer {
-	/**
-	 * A phase after default phase.
-	 */
+	/// A phase after default phase.
 	static final ResourceLocation WILDCARD_PHASE = tryParse("$id");
-	/**
-	 * <p>
-	 * {@code foo.bar.baz.qux} -> {@code qux}
-	 * </p>
-	 * <p>
-	 * {@code foo.bar.baz.*} -> {@code baz.*}
-	 * </p>
-	 */
+	/// `foo.bar.baz.qux` -> `qux`
+	///
+	/// `foo.bar.baz.*` -> `baz.*`
 	static final String regex = "[^\\.]+\\.?\\*?\\z";
-	/**
-	 * Only look up metadata with these prefixes.
-	 */
+	/// Only look up metadata with these prefixes.
 	public static final CopyOnWriteArraySet<String> prefixStrings = new CopyOnWriteArraySet<String>();
 
 	static {
@@ -71,12 +51,10 @@ public class MetadataWildcard implements DedicatedServerModInitializer {
 		});
 	}
 
-	/**
-	 * If this metadata should be empty.
-	 *
-	 * @param key key of metadata
-	 * @return {@code true} for empty, and {@code false} for recursion continues
-	 */
+	/// If this metadata should be empty.
+	///
+	/// @param key key of metadata
+	/// @return `true` for empty, and `false` for recursion continues
 	static boolean isEmpty(String key) {
 		return key.equals("*") || prefixStrings.parallelStream().noneMatch(prefix -> key.startsWith(prefix));
 	}
