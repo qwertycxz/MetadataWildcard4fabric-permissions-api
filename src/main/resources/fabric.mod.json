@@ -1,24 +1,23 @@
 {
-	"schemaVersion": 1,
 	"$schema": "https://www.schemastore.org/fabric.mod",
 	"authors": [
 		{
 			"contact": {
-				"github": "https://github.com/qwertycxz",
-				"homepage": "https://qwertycxz.top",
-				"ko-fi": "https://ko-fi.com/qwertycxz"
+				"GitHub": "$github",
+				"homepage": "$homepage",
+				"Ko-fi": "$kofi"
 			},
-			"name": "qwerty吃小庄"
+			"name": "$developer"
 		}
 	],
 	"contact": {
-		"issues": "https://github.com/qwertycxz/MetadataWildcard4fabric-permissions-api/issues",
-		"sources": "https://github.com/qwertycxz/MetadataWildcard4fabric-permissions-api"
+		"issues": "$issue",
+		"sources": "$scm"
 	},
 	"depends": {
 		"fabric-permissions-api-v0": "*"
 	},
-	"description": "An addon for fabric-permissions-api that enables wildcard support in metadata.",
+	"description": "$description",
 	"entrypoints": {
 		"server": [
 			"top.qwertycxz.metadatawildcard.MetadataWildcard"
@@ -26,8 +25,8 @@
 	},
 	"environment": "server",
 	"icon": "icon.png",
-	"id": "metadatawildcard4fabric-permissions-api",
-	"license": "Apache-2.0",
-	"name": "Metadata Wildcard for fabric-permissions-api",
-	"version": "0.0.0"
+	"id": "$id",
+	"license": "$license",
+	"name": "$name",
+	"version": "$version"
 }

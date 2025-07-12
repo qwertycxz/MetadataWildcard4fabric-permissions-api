@@ -1,6 +1,21 @@
 plugins {
+	id 'com.gladed.androidgitversion' version '0.4.14'
+	id 'com.vanniktech.maven.publish' version '0.33.0'
 	id 'fabric-loom' version '1.11-SNAPSHOT'
+	id 'net.kyori.blossom' version '2.1.0'
 }
+
+group = 'top.qwertycxz'
+version = androidGitVersion.name()
+var DESCRIPTION = 'An addon for fabric-permissions-api that enables wildcard support in metadata.'
+var DEVELOPER = 'qwerty吃小庄'
+var GITHUB = 'https://github.com/qwertycxz'
+var HOMEPAGE = 'https://qwertycxz.top'
+var ISSUE = 'https://github.com/qwertycxz/MetadataWildcard4fabric-permissions-api/issues'
+var KO_FI = 'https://ko-fi.com/qwertycxz'
+var LICENSE = 'The Apache License, Version 2.0'
+var NAME = 'Metadata Wildcard for fabric-permissions-api'
+var SCM = 'https://github.com/qwertycxz/MetadataWildcard4fabric-permissions-api'
 
 dependencies {
 	mappings loom.officialMojangMappings()
@@ -22,6 +37,78 @@ loom {
 		}
 	}
 	serverOnlyMinecraftJar()
+}
+
+mavenPublishing {
+	pom {
+		ciManagement {
+			url = 'https://github.com/qwertycxz/MetadataWildcard4fabric-permissions-api/actions'
+			system = 'GitHub Actions'
+		}
+		description = DESCRIPTION
+		developers {
+			developer {
+				id = 'qwertycxz'
+				name = DEVELOPER
+				properties = [
+					'GitHub': GITHUB,
+					'Ko-fi': KO_FI,
+				]
+				timezone = 'Asia/Shanghai'
+				url = HOMEPAGE
+			}
+		}
+		inceptionYear = '2025'
+		issueManagement {
+			system = 'GitHub'
+			url = ISSUE
+		}
+		licenses {
+			license {
+				distribution = 'repo'
+				name = LICENSE
+				url = 'https://www.apache.org/licenses/LICENSE-2.0'
+			}
+		}
+		name = NAME
+		scm {
+			connection = 'scm:git:git://github.com/qwertycxz/MetadataWildcard4fabric-permissions-api'
+			developerConnection = 'scm:git:ssh://github.com/qwertycxz/MetadataWildcard4fabric-permissions-api'
+			url = SCM
+		}
+	}
+	publishToMavenCentral()
+	signAllPublications()
+}
+
+processResources {
+	filesMatching('fabric.mod.json') {
+		expand(
+			description: DESCRIPTION,
+			developer: DEVELOPER,
+			github: GITHUB,
+			homepage: HOMEPAGE,
+			id: project.POM_ARTIFACT_ID,
+			issue: ISSUE,
+			kofi: KO_FI,
+			license: LICENSE,
+			name: NAME,
+			schema: '''schemaVersion': 1,
+	'$schema''',
+			scm: SCM,
+			version: project.version,
+		)
+	}
+}
+
+publishing {
+	repositories {
+		maven {
+			name = 'githubPackages'
+			url = 'https://maven.pkg.github.com/qwertycxz/MetadataWildcard4fabric-permissions-api'
+			credentials(PasswordCredentials)
+		}
+	}
 }
 
 tasks.withType(JavaCompile).configureEach {
