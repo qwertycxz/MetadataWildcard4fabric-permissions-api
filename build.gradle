@@ -6,19 +6,6 @@ plugins {
 	id 'net.raphimc.class-token-replacer' version '1.1.7'
 }
 
-var DESCRIPTION = 'An addon for fabric-permissions-api that enables wildcard support in metadata.'
-var DEVELOPER = 'qwerty吃小庄'
-var GITHUB = 'https://github.com/qwertycxz'
-var GROUP = 'top.qwertycxz'
-var HOMEPAGE = 'https://qwertycxz.top'
-var ID = 'metadatawildcard4fabric-permissions-api'
-var ISSUE = 'https://github.com/qwertycxz/MetadataWildcard4fabric-permissions-api/issues'
-var KO_FI = 'https://ko-fi.com/qwertycxz'
-var LICENSE = 'The Apache License, Version 2.0'
-var NAME = 'Metadata Wildcard for fabric-permissions-api'
-var SCM = 'https://github.com/qwertycxz/MetadataWildcard4fabric-permissions-api'
-var VERSION = androidGitVersion.name()
-
 dependencies {
 	mappings loom.officialMojangMappings()
 	minecraft 'com.mojang:minecraft:1.21.7'
@@ -41,8 +28,46 @@ loom {
 	serverOnlyMinecraftJar()
 }
 
+publishing {
+	repositories {
+		maven {
+			name = 'githubPackages'
+			url = 'https://maven.pkg.github.com/qwertycxz/MetadataWildcard4fabric-permissions-api'
+			credentials PasswordCredentials
+		}
+	}
+}
+
+tasks.withType JavaCompile configureEach {
+	options.deprecation = true
+	options.encoding = 'UTF-8'
+	options.listFiles = true
+	options.release = 15
+}
+
+var ID = 'metadatawildcard4fabric-permissions-api'
+sourceSets {
+	main {
+		classTokenReplacer {
+			property '$id', ID
+			replaceInPlace = true
+		}
+	}
+}
+
+var DESCRIPTION = 'An addon for fabric-permissions-api that enables wildcard support in metadata.'
+var DEVELOPER = 'qwerty吃小庄'
+var GITHUB = 'https://github.com/qwertycxz'
+var HOMEPAGE = 'https://qwertycxz.top'
+var ISSUE = 'https://github.com/qwertycxz/MetadataWildcard4fabric-permissions-api/issues'
+var KO_FI = 'https://ko-fi.com/qwertycxz'
+var LICENSE = 'The Apache License, Version 2.0'
+var NAME = 'Metadata Wildcard for fabric-permissions-api'
+var SCM = 'https://github.com/qwertycxz/MetadataWildcard4fabric-permissions-api'
+var VERSION = androidGitVersion.name()
+
 mavenPublishing {
-	coordinates GROUP, ID, VERSION
+	coordinates 'top.qwertycxz', ID, VERSION
 	pom {
 		ciManagement {
 			url = 'https://github.com/qwertycxz/MetadataWildcard4fabric-permissions-api/actions'
@@ -101,25 +126,6 @@ processResources {
 			scm: SCM,
 			version: VERSION,
 			)
-	}
-}
-
-publishing {
-	repositories {
-		maven {
-			name = 'githubPackages'
-			url = 'https://maven.pkg.github.com/qwertycxz/MetadataWildcard4fabric-permissions-api'
-			credentials PasswordCredentials
-		}
-	}
-}
-
-sourceSets {
-	main {
-		classTokenReplacer {
-			property '$id', ID
-			replaceInPlace = true
-		}
 	}
 }
 
@@ -263,11 +269,4 @@ spotless {
 		setLineEndings 'UNIX'
 		target 'src/**/*.json'
 	}
-}
-
-tasks.withType JavaCompile configureEach {
-	options.deprecation = true
-	options.encoding = 'UTF-8'
-	options.listFiles = true
-	options.release = 15
 }
