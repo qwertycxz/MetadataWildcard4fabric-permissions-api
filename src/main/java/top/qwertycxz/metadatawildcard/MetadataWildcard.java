@@ -10,6 +10,7 @@ import static me.lucko.fabric.api.permissions.v0.Options.get;
 import static net.fabricmc.fabric.api.event.Event.DEFAULT_PHASE;
 import static net.fabricmc.loader.api.FabricLoader.getInstance;
 import static net.minecraft.resources.ResourceLocation.tryParse;
+
 import java.io.IOException;
 import java.util.concurrent.CopyOnWriteArraySet;
 import me.lucko.fabric.api.permissions.v0.OfflineOptionRequestEvent;
@@ -25,18 +26,18 @@ import net.minecraft.resources.ResourceLocation;
 /// When checking a key like `foo.bar.baz.qux`:
 /// 1. First checks for an exact match
 /// 2. If not found, checks parent keys with wildcards in descending order:
-///     * `foo.bar.baz.*`
-///     * `foo.bar.*`
+/// 	* `foo.bar.baz.*`
+/// 	* `foo.bar.*`
 /// 3. Returns unset if no match is found
 public class MetadataWildcard implements DedicatedServerModInitializer {
+	/// Only look up metadata with these prefixes.
+	public static final CopyOnWriteArraySet<String> prefixStrings = new CopyOnWriteArraySet<String>();
 	/// A phase after default phase.
 	static final ResourceLocation WILDCARD_PHASE = tryParse("$id");
 	/// `foo.bar.baz.qux` -> `qux`
 	///
 	/// `foo.bar.baz.*` -> `baz.*`
 	static final String regex = "[^\\.]+\\.?\\*?\\z";
-	/// Only look up metadata with these prefixes.
-	public static final CopyOnWriteArraySet<String> prefixStrings = new CopyOnWriteArraySet<String>();
 
 	static {
 		OfflineOptionRequestEvent.EVENT.addPhaseOrdering(DEFAULT_PHASE, WILDCARD_PHASE);
@@ -56,7 +57,7 @@ public class MetadataWildcard implements DedicatedServerModInitializer {
 	/// @param key key of metadata
 	/// @return `true` for empty, and `false` for recursion continues
 	static boolean isEmpty(String key) {
-		return key.equals("*") || prefixStrings.parallelStream().noneMatch(prefix -> key.startsWith(prefix));
+		return "*".equals(key) || prefixStrings.parallelStream().noneMatch(key::startsWith);
 	}
 
 	public void onInitializeServer() {
