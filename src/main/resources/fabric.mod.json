@@ -4,8 +4,8 @@
 		{
 			"contact": {
 				"GitHub": "$github",
-				"homepage": "$homepage",
-				"Ko-fi": "$kofi"
+				"Ko-fi": "$kofi",
+				"homepage": "$homepage"
 			},
 			"name": "$developer"
 		}
