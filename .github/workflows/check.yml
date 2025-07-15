@@ -3,10 +3,12 @@ jobs:
   check:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@main
-    - name: Setup GraalVM 24 with Gradle
-      uses: ./.github/actions/setup
-    - run: gradle check
+      - uses: actions/checkout@main
+      - name: Setup GraalVM 24 with Gradle
+        uses: ./.github/actions/setup
+      - run: gradle check
 on:
-- pull_request
-- push
+  pull_request:
+    branches: [master]
+  push:
+    branches: [master]
