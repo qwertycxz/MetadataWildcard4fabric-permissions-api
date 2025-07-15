@@ -5,7 +5,7 @@ jobs:
     steps:
     - uses: actions/checkout@main
     - uses: ./.github/actions/setup
-    - run: ./gradlew check
+    - run: gradle check
 on:
 - pull_request
 - push
