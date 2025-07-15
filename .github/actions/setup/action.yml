@@ -3,13 +3,13 @@ author: qwerty吃小庄
 branding:
   color: white
   icon: settings
-description: Setup Oracle JDK 24
+description: Setup GraalVM 24
 name: Setup
 runs:
   steps:
   - uses: actions/setup-java@main
     with:
       cache: gradle
-      distribution: oracle
+      distribution: graalvm
       java-version: 24
   using: composite
