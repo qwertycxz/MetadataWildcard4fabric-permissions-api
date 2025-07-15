@@ -7,7 +7,7 @@ plugins {
 }
 
 androidGitVersion {
-	prefix 'v'
+	prefix = 'v'
 }
 
 dependencies {
