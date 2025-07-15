@@ -199,6 +199,7 @@ var ECLIPSE = '''
 spotless {
 	flexmark {
 		flexmark()
+		setLineEndings 'UNIX'
 		target '*.md'
 	}
 	groovyGradle {
