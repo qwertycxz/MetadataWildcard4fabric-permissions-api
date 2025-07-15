@@ -3,7 +3,7 @@ author: qwerty吃小庄
 branding:
   color: white
   icon: settings
-description: Setup GraalVM 24
+description: Setup GraalVM 24 with Gradle
 name: Setup
 runs:
   steps:

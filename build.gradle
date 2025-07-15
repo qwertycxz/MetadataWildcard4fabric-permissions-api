@@ -31,7 +31,7 @@ loom {
 publishing {
 	repositories {
 		maven {
-			name = 'githubPackages'
+			name = 'GitHub'
 			url = 'https://maven.pkg.github.com/qwertycxz/MetadataWildcard4fabric-permissions-api'
 			credentials PasswordCredentials
 		}
