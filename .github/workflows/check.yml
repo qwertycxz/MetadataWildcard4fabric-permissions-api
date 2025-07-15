@@ -4,7 +4,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@main
-    - uses: ./.github/actions/check
+    - uses: ./.github/actions/setup
     - run: ./gradlew check
 on:
 - pull_request
