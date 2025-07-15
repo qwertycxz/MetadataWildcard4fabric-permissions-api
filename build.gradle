@@ -108,6 +108,7 @@ mavenPublishing {
 			developerConnection = 'scm:git:ssh://github.com/qwertycxz/MetadataWildcard4fabric-permissions-api'
 			url = SCM
 		}
+		url = SCM
 	}
 	publishToMavenCentral()
 	signAllPublications()
