@@ -3,6 +3,7 @@ jobs:
   check:
     runs-on: ubuntu-latest
     steps:
+    - uses: actions/checkout@main
     - uses: ./.github/workflows/setup.yml
     - run: ./gradlew check
 on:
