@@ -1,0 +1,15 @@
+# yaml-language-server: $schema=https://json.schemastore.org/github-action
+author: qwerty吃小庄
+branding:
+  color: white
+  icon: settings
+description: Setup Orcale JDK 24
+name: Setup
+runs:
+  steps:
+  - uses: actions/setup-java@main
+    with:
+      cache: gradle
+      distribution: orcale
+      java-version: 24
+  using: composite
