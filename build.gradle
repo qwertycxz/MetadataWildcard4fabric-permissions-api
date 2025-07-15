@@ -272,4 +272,11 @@ spotless {
 		setLineEndings 'UNIX'
 		target 'src/**/*.json'
 	}
+	yaml {
+		endWithNewline()
+		leadingTabsToSpaces 2
+		setLineEndings 'UNIX'
+		target '.github/**/*.yml'
+		trimTrailingWhitespace()
+	}
 }

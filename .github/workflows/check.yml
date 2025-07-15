@@ -1,0 +1,10 @@
+# yaml-language-server: $schema=https://json.schemastore.org/github-workflow
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: ./.github/workflows/setup.yml
+    - run: ./gradlew check
+on:
+- pull_request
+- push
