@@ -14,8 +14,15 @@
 		"issues": "$issue",
 		"sources": "$scm"
 	},
+	"custom": {
+		"mc-publish": {
+			"curseforge": 1307729,
+			"modrinth": "eCT6lHG4"
+		}
+	},
 	"depends": {
-		"fabric-permissions-api-v0": "*"
+		"fabric-permissions-api-v0": "*",
+		"minecraft": ">=1.16.5"
 	},
 	"description": "$description",
 	"entrypoints": {
@@ -28,5 +35,8 @@
 	"id": "$id",
 	"license": "$license",
 	"name": "$name",
+	"suggests": {
+		"luckperms": "*"
+	},
 	"version": "$version"
 }
