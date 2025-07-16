@@ -202,13 +202,11 @@ var ECLIPSE = '''
 '''
 
 spotless {
-	/* until flexmark is configurable
-	flexmark {
-		flexmark()
-		setLineEndings 'UNIX'
-		target '*.md'
-	}
-	*/
+	// flexmark {
+	// 	flexmark()
+	// 	setLineEndings 'UNIX'
+	// 	target '*.md'
+	// }
 	groovyGradle {
 		greclipse() configProperties ECLIPSE
 		importOrder()

@@ -48,7 +48,7 @@ Add dependency in `build.gradle`:
 
 ```groovy
 // Optional dependency (users install manually)
-modImplementation "top.qwertycxz:metadatawildcard4fabric-permissions-api:0.0.1"
+modImplementation("top.qwertycxz:metadatawildcard4fabric-permissions-api:0.0.1")
 
 // OR bundle with your mod
 include(modImplementation("top.qwertycxz:metadatawildcard4fabric-permissions-api:0.0.1"))
