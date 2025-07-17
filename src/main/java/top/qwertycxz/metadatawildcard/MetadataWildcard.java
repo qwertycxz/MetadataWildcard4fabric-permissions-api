@@ -37,7 +37,7 @@ public class MetadataWildcard implements DedicatedServerModInitializer {
 	/// `foo.bar.baz.qux` -> `qux`
 	///
 	/// `foo.bar.baz.*` -> `baz.*`
-	static final String regex = "[^\\.]+\\.?\\*?\\z";
+	static final String regex = "[^\\.]+\\.?\\*?$";
 
 	static {
 		OfflineOptionRequestEvent.EVENT.addPhaseOrdering(DEFAULT_PHASE, WILDCARD_PHASE);
