@@ -16,10 +16,11 @@ This fabric-permissions-api addon enables wildcard metadata resolution for any m
 
 ## Requirement
 
+* Java ⩾ 15
 * Minecraft ⩾ 1.16.5
 * Fabric
 * fabric-permissions-api ⩾ 0.3
-* Any permission mod supports fabric-permissions-api (i.e. LuckPerms)
+* Any permission mod supports fabric-permissions-api (i.e. [LuckPerms](https://github.com/lucko/LuckPerms 'GitHub'))
 
 ## Usage
 
