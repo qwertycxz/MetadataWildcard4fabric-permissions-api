@@ -1,6 +1,6 @@
 # Metadata Wildcard for fabric-permissions-api
 
-LuckPerms supports wildcard permissions:
+[LuckPerms](https://github.com/lucko/LuckPerms 'GitHub') supports wildcard permissions:
 
 ```sh
 lp user <username> permission set luckperms.* true
@@ -12,7 +12,11 @@ But lacks wildcard support for metadata:
 lp user <username> meta set some.mod.need.metadata.* 69
 ```
 
-This fabric-permissions-api addon enables wildcard metadata resolution for any mod using the permissions API.
+This [fabric-permissions-api](https://github.com/lucko/fabric-permissions-api 'GitHub') addon enables wildcard metadata resolution for any mod using the permissions API.
+
+## Synopsis
+
+This mod works like when [`apply-wildcards`](https://luckperms.net/wiki/Configuration#apply-wildcards)`= true` and [`apply-sponge-default-subjects`](https://luckperms.net/wiki/Configuration#apply-sponge-implicit-wildcards)`= false`
 
 ## Requirement
 
@@ -20,7 +24,7 @@ This fabric-permissions-api addon enables wildcard metadata resolution for any m
 * Minecraft ⩾ 1.16.5
 * Fabric
 * fabric-permissions-api ⩾ 0.3
-* Any permission mod supports fabric-permissions-api (i.e. [LuckPerms](https://github.com/lucko/LuckPerms 'GitHub'))
+* Any permission mod supports [fabric-permissions-api](https://github.com/lucko/fabric-permissions-api 'GitHub') (e.g. [LuckPerms](https://github.com/lucko/LuckPerms 'GitHub'))
 
 ## Usage
 
