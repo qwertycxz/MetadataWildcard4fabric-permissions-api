@@ -12,3 +12,5 @@ on:
     branches: [master]
   push:
     branches: [master]
+permissions:
+  contents: read
