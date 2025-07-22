@@ -66,6 +66,7 @@ var HOMEPAGE = 'https://qwertycxz.top'
 var ISSUE = 'https://github.com/qwertycxz/MetadataWildcard4fabric-permissions-api/issues'
 var KO_FI = 'https://ko-fi.com/qwertycxz'
 var LICENSE = 'The Apache License, Version 2.0'
+var MODRINTH = 'https://modrinth.com/mod/metadatawildcard4fabric-permissions-api'
 var NAME = 'Metadata Wildcard for fabric-permissions-api'
 var SCM = 'https://github.com/qwertycxz/MetadataWildcard4fabric-permissions-api'
 var VERSION = androidGitVersion.name()
@@ -108,7 +109,7 @@ mavenPublishing {
 			developerConnection = 'scm:git:ssh://github.com/qwertycxz/MetadataWildcard4fabric-permissions-api'
 			url = SCM
 		}
-		url = SCM
+		url = MODRINTH
 	}
 	publishToMavenCentral()
 	signAllPublications()
@@ -125,6 +126,7 @@ processResources {
 			issue: ISSUE,
 			kofi: KO_FI,
 			license: LICENSE,
+			modrinth: MODRINTH,
 			name: NAME,
 			schema: '''schemaVersion": 1,
 	"$schema''',
