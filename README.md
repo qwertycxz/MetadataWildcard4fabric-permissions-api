@@ -39,7 +39,7 @@ This [fabric-permissions-api](https://github.com/lucko/fabric-permissions-api 'G
 
 ## Synopsis
 
-This mod works like when [`apply-wildcards`](https://luckperms.net/wiki/Configuration#apply-wildcards)`= true` and [`apply-sponge-default-subjects`](https://luckperms.net/wiki/Configuration#apply-sponge-implicit-wildcards)`= false`
+This mod works like when [`apply-wildcards`](https://luckperms.net/wiki/Configuration#apply-wildcards)`= true` and [`apply-sponge-implicit-wildcards`](https://luckperms.net/wiki/Configuration#apply-sponge-implicit-wildcards)`= false`
 
 ## Download
 
