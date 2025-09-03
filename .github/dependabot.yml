@@ -1,5 +1,8 @@
 # yaml-language-server: $schema=https://www.schemastore.org/dependabot-2.0
 registries:
+  central:
+    type: maven-repository
+    url: https://repo1.maven.org/maven2
   fabric:
     type: maven-repository
     url: https://maven.fabricmc.net
@@ -17,6 +20,8 @@ updates:
       include: scope
       prefix: gradle
     directory: /
+    ignore:
+      - dependency-name: com.mojang:minecraft
     package-ecosystem: gradle
     registries: '*'
     schedule:
