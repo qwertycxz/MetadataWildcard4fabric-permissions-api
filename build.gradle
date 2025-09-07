@@ -32,16 +32,6 @@ loom {
 	serverOnlyMinecraftJar()
 }
 
-publishing {
-	repositories {
-		maven {
-			name = 'GitHub'
-			url = 'https://maven.pkg.github.com/qwertycxz/MetadataWildcard4fabric-permissions-api'
-			credentials PasswordCredentials
-		}
-	}
-}
-
 tasks.withType JavaCompile configureEach {
 	options.deprecation = true
 	options.encoding = 'UTF-8'
@@ -49,42 +39,60 @@ tasks.withType JavaCompile configureEach {
 	options.release = 15
 }
 
-var ID = 'metadatawildcard4fabric-permissions-api'
+var DEVELOPER_LOWERCASE = 'qwertycxz'
+var DEVELOPER_NAME = 'qwerty吃小庄'
+var DEVELOPER_SCM = "github.com/${DEVELOPER_LOWERCASE}"
+var DEVELOPER_GITHUB = "https://${DEVELOPER_SCM}"
+var MOD_LOWERCASE = 'metadatawildcard4fabric-permissions-api'
+var MOD_CAPITAL = 'MetadataWildcard4fabric-permissions-api'
+var MOD_NAME = 'Metadata Wildcard for fabric-permissions-api'
+var MOD_SCM = "${DEVELOPER_SCM}/${MOD_CAPITAL}"
+var MOD_GITHUB = "${DEVELOPER_GITHUB}/${MOD_CAPITAL}"
+
+publishing {
+	repositories {
+		maven {
+			name = 'GitHub'
+			url = "https://maven.pkg.github.com/${DEVELOPER_LOWERCASE}/${MOD_CAPITAL}"
+			credentials PasswordCredentials
+		}
+	}
+}
+
 sourceSets {
 	main {
 		classTokenReplacer {
-			property '$id', ID
+			property '$lowercase', MOD_LOWERCASE
+			property '$capital', MOD_CAPITAL
+			property '$id', MOD_LOWERCASE
 			replaceInPlace = true
 		}
 	}
 }
 
 var DESCRIPTION = 'An addon for fabric-permissions-api that enables wildcard support in metadata.'
-var DEVELOPER = 'qwerty吃小庄'
-var GITHUB = 'https://github.com/qwertycxz'
+var GROUP = 'top.qwertycxz'
 var HOMEPAGE = 'https://qwertycxz.top'
-var ISSUE = 'https://github.com/qwertycxz/MetadataWildcard4fabric-permissions-api/issues'
-var KO_FI = 'https://ko-fi.com/qwertycxz'
+var ISSUE = "${MOD_GITHUB}/issues"
+var KO_FI = "https://ko-fi.com/${DEVELOPER_LOWERCASE}"
 var LICENSE = 'The Apache License, Version 2.0'
-var MODRINTH = 'https://modrinth.com/mod/metadatawildcard4fabric-permissions-api'
-var NAME = 'Metadata Wildcard for fabric-permissions-api'
-var SCM = 'https://github.com/qwertycxz/MetadataWildcard4fabric-permissions-api'
+var MODRINTH = "https://modrinth.com/mod/${MOD_LOWERCASE}"
 var VERSION = androidGitVersion.name()
 
 mavenPublishing {
-	coordinates 'top.qwertycxz', ID, VERSION
+	coordinates GROUP, MOD_LOWERCASE, VERSION
 	pom {
 		ciManagement {
-			url = 'https://github.com/qwertycxz/MetadataWildcard4fabric-permissions-api/actions'
+			url = "${MOD_GITHUB}/actions"
 			system = 'GitHub Actions'
 		}
 		description = DESCRIPTION
 		developers {
 			developer {
-				id = 'qwertycxz'
-				name = DEVELOPER
+				id = DEVELOPER_LOWERCASE
+				name = DEVELOPER_NAME
 				properties = [
-					'GitHub': GITHUB,
+					'GitHub': DEVELOPER_GITHUB,
 					'Ko-fi': KO_FI,
 				]
 				timezone = 'Asia/Shanghai'
@@ -103,11 +111,11 @@ mavenPublishing {
 				url = 'https://www.apache.org/licenses/LICENSE-2.0'
 			}
 		}
-		name = NAME
+		name = MOD_NAME
 		scm {
-			connection = 'scm:git:git://github.com/qwertycxz/MetadataWildcard4fabric-permissions-api'
-			developerConnection = 'scm:git:ssh://github.com/qwertycxz/MetadataWildcard4fabric-permissions-api'
-			url = SCM
+			connection = "scm:git:git://${MOD_SCM}"
+			developerConnection = "scm:git:ssh://${MOD_SCM}"
+			url = MOD_GITHUB
 		}
 		url = MODRINTH
 	}
@@ -118,19 +126,20 @@ mavenPublishing {
 processResources {
 	filesMatching('fabric.mod.json') {
 		expand(
+			central: "https://central.sonatype.com/artifact/${GROUP}/${MOD_LOWERCASE}",
 			description: DESCRIPTION,
-			developer: DEVELOPER,
-			github: GITHUB,
+			developer: DEVELOPER_NAME,
+			github: DEVELOPER_GITHUB,
 			homepage: HOMEPAGE,
-			id: ID,
+			id: MOD_LOWERCASE,
 			issue: ISSUE,
 			kofi: KO_FI,
 			license: LICENSE,
 			modrinth: MODRINTH,
-			name: NAME,
+			name: MOD_NAME,
 			schema: '''schemaVersion": 1,
 	"$schema''',
-			scm: SCM,
+			scm: MOD_GITHUB,
 			version: VERSION,
 			)
 	}

@@ -33,7 +33,7 @@ public class MetadataWildcard implements DedicatedServerModInitializer {
 	/// Only look up metadata with these prefixes.
 	public static final CopyOnWriteArraySet<String> prefixStrings = new CopyOnWriteArraySet<String>();
 	/// A phase after default phase.
-	static final ResourceLocation WILDCARD_PHASE = tryParse("$id");
+	static final ResourceLocation WILDCARD_PHASE = tryParse("$lowercase");
 	/// `foo.bar.baz.qux` -> `qux`
 	///
 	/// `foo.bar.baz.*` -> `baz.*`
@@ -61,7 +61,7 @@ public class MetadataWildcard implements DedicatedServerModInitializer {
 	}
 
 	public void onInitializeServer() {
-		var configDirectory = getInstance().getConfigDir().resolve("MetadataWildcard4fabric-permissions-api");
+		var configDirectory = getInstance().getConfigDir().resolve("$capital");
 		var prefixConfig = configDirectory.resolve("prefix.txt");
 		try {
 			try {
