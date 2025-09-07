@@ -76,7 +76,7 @@ public class MetadataWildcard implements DedicatedServerModInitializer {
 			prefixStrings.addAll(lines(prefixConfig).parallel().collect(toSet()));
 		}
 		catch (IOException e) {
-			throw new RuntimeException("Failed to load config file for mod Metadata Wildcard for fabric-permissions-api");
+			throw new RuntimeException("Failed to load config file for mod $name");
 		}
 	}
 }

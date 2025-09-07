@@ -64,7 +64,7 @@ sourceSets {
 		classTokenReplacer {
 			property '$lowercase', MOD_LOWERCASE
 			property '$capital', MOD_CAPITAL
-			property '$id', MOD_LOWERCASE
+			property '$name', MOD_NAME
 			replaceInPlace = true
 		}
 	}
