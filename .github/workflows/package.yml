@@ -6,8 +6,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@main
-      - name: Setup GraalVM 24 with Gradle
-        uses: ./.github/actions/setup
+      - uses: actions/setup-java@main
+        with:
+          cache: gradle
+          distribution: graalvm
+          java-version: 25
       - env:
           ORG_GRADLE_PROJECT_GitHubPassword: ${{ secrets.GITHUB_TOKEN }}
           ORG_GRADLE_PROJECT_GitHubUsername: ${{ secrets.GITHUB_ACTOR }}
