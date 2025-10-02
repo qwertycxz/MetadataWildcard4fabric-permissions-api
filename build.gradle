@@ -13,7 +13,7 @@ androidGitVersion {
 dependencies {
 	mappings loom.officialMojangMappings()
 	minecraft 'com.mojang:minecraft:1.21.9'
-	modImplementation 'me.lucko:fabric-permissions-api:0.4.1'
+	modImplementation 'me.lucko:fabric-permissions-api:0.5.0'
 	modImplementation 'net.fabricmc:fabric-loader:0.17.2'
 	modImplementation fabricApi.module('fabric-api-base', '0.133.14+1.21.9')
 }
