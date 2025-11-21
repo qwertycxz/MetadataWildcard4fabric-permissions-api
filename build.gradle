@@ -14,7 +14,7 @@ dependencies {
 	mappings loom.officialMojangMappings()
 	minecraft 'com.mojang:minecraft:1.21.10'
 	modImplementation 'me.lucko:fabric-permissions-api:0.5.0'
-	modImplementation 'net.fabricmc:fabric-loader:0.18.0'
+	modImplementation 'net.fabricmc:fabric-loader:0.18.1'
 	modImplementation fabricApi.module('fabric-api-base', '0.134.1+1.21.10')
 }
 
