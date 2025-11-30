@@ -277,6 +277,7 @@ spotless {
 			'UseTextBlocks',
 		]) includeDraft true sourceCompatibility '24'
 		eclipse() configProperties ECLIPSE sortMembersDoNotSortFields false sortMembersEnabled true sortMembersVisibilityOrderEnabled true
+		forbidModuleImports()
 		forbidWildcardImports()
 		importOrder()
 		removeUnusedImports()
