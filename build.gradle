@@ -275,7 +275,7 @@ spotless {
 			'UsePredefinedStandardCharset',
 			'UseStringIsEmpty',
 			'UseTextBlocks',
-		]) includeDraft true sourceCompatibility '24'
+		]) includeDraft true sourceCompatibility '25'
 		eclipse() configProperties ECLIPSE sortMembersDoNotSortFields false sortMembersEnabled true sortMembersVisibilityOrderEnabled true
 		forbidModuleImports()
 		forbidWildcardImports()
