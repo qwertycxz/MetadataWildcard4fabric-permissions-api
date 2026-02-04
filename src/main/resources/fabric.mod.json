@@ -24,7 +24,7 @@
 	},
 	"depends": {
 		"fabric-permissions-api-v0": "*",
-		"minecraft": ">=1.16.5"
+		"minecraft": "$minecraft"
 	},
 	"description": "$description",
 	"entrypoints": {

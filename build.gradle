@@ -1,35 +1,16 @@
 plugins {
 	id 'com.diffplug.spotless' version '8.1.0'
 	id 'com.gladed.androidgitversion' version '0.4.14'
-	id 'com.vanniktech.maven.publish' version '0.36.0'
-	id 'fabric-loom' version '1.14-SNAPSHOT'
-	id 'net.raphimc.class-token-replacer' version '1.1.7'
+	id 'com.vanniktech.maven.publish' version '0.36.0' apply false
+	id 'net.raphimc.class-token-replacer' version '1.1.7' apply false
+}
+
+repositories {
+	mavenCentral()
 }
 
 androidGitVersion {
 	prefix = 'v'
-}
-
-dependencies {
-	mappings loom.officialMojangMappings()
-	minecraft 'com.mojang:minecraft:1.21.10'
-	modImplementation 'me.lucko:fabric-permissions-api:0.5.0'
-	modImplementation 'net.fabricmc:fabric-loader:0.18.1'
-	modImplementation fabricApi.module('fabric-api-base', '0.134.1+1.21.10')
-}
-
-loom {
-	decompilers {
-		cfr {
-			memory = 1024
-		}
-	}
-	runs {
-		server {
-			vmArgs '-Xmx1G'
-		}
-	}
-	serverOnlyMinecraftJar()
 }
 
 tasks.withType JavaCompile configureEach {
@@ -48,28 +29,6 @@ var MOD_CAPITAL = 'MetadataWildcard4fabric-permissions-api'
 var MOD_NAME = 'Metadata Wildcard for fabric-permissions-api'
 var MOD_SCM = "${DEVELOPER_SCM}/${MOD_CAPITAL}"
 var MOD_GITHUB = "${DEVELOPER_GITHUB}/${MOD_CAPITAL}"
-
-publishing {
-	repositories {
-		maven {
-			name = 'GitHub'
-			url = "https://maven.pkg.github.com/${DEVELOPER_LOWERCASE}/${MOD_CAPITAL}"
-			credentials PasswordCredentials
-		}
-	}
-}
-
-sourceSets {
-	main {
-		classTokenReplacer {
-			property '$lowercase', MOD_LOWERCASE
-			property '$capital', MOD_CAPITAL
-			property '$name', MOD_NAME
-			replaceInPlace = true
-		}
-	}
-}
-
 var DESCRIPTION = 'An addon for fabric-permissions-api that enables wildcard support in metadata.'
 var GROUP = 'top.qwertycxz'
 var HOMEPAGE = 'https://qwertycxz.top'
@@ -79,69 +38,94 @@ var LICENSE = 'The Apache License, Version 2.0'
 var MODRINTH = "https://modrinth.com/mod/${MOD_LOWERCASE}"
 var VERSION = androidGitVersion.name()
 
-mavenPublishing {
-	coordinates GROUP, MOD_LOWERCASE, VERSION
-	pom {
-		ciManagement {
-			url = "${MOD_GITHUB}/actions"
-			system = 'GitHub Actions'
-		}
-		description = DESCRIPTION
-		developers {
-			developer {
-				id = DEVELOPER_LOWERCASE
-				name = DEVELOPER_NAME
-				properties = [
-					'GitHub': DEVELOPER_GITHUB,
-					'Ko-fi': KO_FI,
-				]
-				timezone = 'Asia/Shanghai'
-				url = HOMEPAGE
+subprojects {
+	apply plugin: 'java'
+	apply plugin: 'com.vanniktech.maven.publish'
+	apply plugin: 'net.raphimc.class-token-replacer'
+	mavenPublishing {
+		coordinates GROUP, MOD_LOWERCASE, "${VERSION}-${project.name}"
+		pom {
+			ciManagement {
+				url = "${MOD_GITHUB}/actions"
+				system = 'GitHub Actions'
 			}
-		}
-		inceptionYear = '2025'
-		issueManagement {
-			system = 'GitHub'
-			url = ISSUE
-		}
-		licenses {
-			license {
-				distribution = 'repo'
-				name = LICENSE
-				url = 'https://www.apache.org/licenses/LICENSE-2.0'
+			description = DESCRIPTION
+			developers {
+				developer {
+					id = DEVELOPER_LOWERCASE
+					name = DEVELOPER_NAME
+					properties = [
+						'GitHub': DEVELOPER_GITHUB,
+						'Ko-fi': KO_FI,
+					]
+					timezone = 'Asia/Shanghai'
+					url = HOMEPAGE
+				}
 			}
+			inceptionYear = '2025'
+			issueManagement {
+				system = 'GitHub'
+				url = ISSUE
+			}
+			licenses {
+				license {
+					distribution = 'repo'
+					name = LICENSE
+					url = 'https://www.apache.org/licenses/LICENSE-2.0'
+				}
+			}
+			name = MOD_NAME
+			scm {
+				connection = "scm:git:git://${MOD_SCM}"
+				developerConnection = "scm:git:ssh://${MOD_SCM}"
+				url = MOD_GITHUB
+			}
+			url = MODRINTH
 		}
-		name = MOD_NAME
-		scm {
-			connection = "scm:git:git://${MOD_SCM}"
-			developerConnection = "scm:git:ssh://${MOD_SCM}"
-			url = MOD_GITHUB
-		}
-		url = MODRINTH
+		publishToMavenCentral()
+		signAllPublications()
 	}
-	publishToMavenCentral()
-	signAllPublications()
-}
-
-processResources {
-	filesMatching('fabric.mod.json') {
-		expand(
-			central: "https://central.sonatype.com/artifact/${GROUP}/${MOD_LOWERCASE}",
-			description: DESCRIPTION,
-			developer: DEVELOPER_NAME,
-			github: DEVELOPER_GITHUB,
-			homepage: HOMEPAGE,
-			id: MOD_LOWERCASE,
-			issue: ISSUE,
-			kofi: KO_FI,
-			license: LICENSE,
-			modrinth: MODRINTH,
-			name: MOD_NAME,
-			schema: '''schemaVersion": 1,
+	publishing {
+		repositories {
+			maven {
+				name = 'GitHub'
+				url = "https://maven.pkg.github.com/${DEVELOPER_LOWERCASE}/${MOD_CAPITAL}"
+				credentials PasswordCredentials
+			}
+		}
+	}
+	sourceSets {
+		main {
+			classTokenReplacer {
+				property '$lowercase', MOD_LOWERCASE
+				property '$capital', MOD_CAPITAL
+				property '$name', MOD_NAME
+				replaceInPlace = true
+			}
+		}
+	}
+	var MINECRAFT = project.properties['minecraft']
+	processResources {
+		filesMatching('fabric.mod.json') {
+			expand(
+				central: "https://central.sonatype.com/artifact/${GROUP}/${MOD_LOWERCASE}",
+				description: DESCRIPTION,
+				developer: DEVELOPER_NAME,
+				github: DEVELOPER_GITHUB,
+				homepage: HOMEPAGE,
+				id: MOD_LOWERCASE,
+				issue: ISSUE,
+				kofi: KO_FI,
+				license: LICENSE,
+				minecraft: MINECRAFT,
+				modrinth: MODRINTH,
+				name: MOD_NAME,
+				schema: '''schemaVersion": 1,
 	"$schema''',
-			scm: MOD_GITHUB,
-			version: VERSION,
-			)
+				scm: MOD_GITHUB,
+				version: VERSION,
+				)
+		}
 	}
 }
 
@@ -222,6 +206,7 @@ spotless {
 		greclipse() configProperties ECLIPSE
 		importOrder()
 		setLineEndings 'UNIX'
+		target 'build.gradle', 'settings.gradle', '*/build.gradle', '*/settings.gradle'
 	}
 	java {
 		cleanthat() addMutators([
@@ -282,6 +267,7 @@ spotless {
 		importOrder()
 		removeUnusedImports()
 		setLineEndings 'UNIX'
+		target 'src/**/*.java'
 	}
 	json {
 		jackson() feature('ORDER_MAP_ENTRIES_BY_KEYS', true) jsonFeature('ESCAPE_FORWARD_SLASHES', false) jsonFeature('STRICT_DUPLICATE_DETECTION', true)
