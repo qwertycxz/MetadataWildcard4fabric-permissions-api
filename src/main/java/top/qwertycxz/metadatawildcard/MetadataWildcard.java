@@ -9,14 +9,14 @@ import static java.util.stream.Collectors.toSet;
 import static me.lucko.fabric.api.permissions.v0.Options.get;
 import static net.fabricmc.fabric.api.event.Event.DEFAULT_PHASE;
 import static net.fabricmc.loader.api.FabricLoader.getInstance;
-import static net.minecraft.resources.ResourceLocation.tryParse;
+import static net.minecraft.resources.Identifier.tryParse;
 
 import java.io.IOException;
 import java.util.concurrent.CopyOnWriteArraySet;
 import me.lucko.fabric.api.permissions.v0.OfflineOptionRequestEvent;
 import me.lucko.fabric.api.permissions.v0.OptionRequestEvent;
 import net.fabricmc.api.DedicatedServerModInitializer;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 
 /// An addon for fabric-permissions-api that enables wildcard support in metadata.
 /// # Example
@@ -33,7 +33,7 @@ public class MetadataWildcard implements DedicatedServerModInitializer {
 	/// Only look up metadata with these prefixes.
 	public static final CopyOnWriteArraySet<String> prefixStrings = new CopyOnWriteArraySet<String>();
 	/// A phase after default phase.
-	static final ResourceLocation WILDCARD_PHASE = tryParse("$lowercase");
+	static final Identifier WILDCARD_PHASE = tryParse("$lowercase");
 	/// `foo.bar.baz.qux` -> `qux`
 	///
 	/// `foo.bar.baz.*` -> `baz.*`
