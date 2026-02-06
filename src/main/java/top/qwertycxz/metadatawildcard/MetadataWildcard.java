@@ -33,11 +33,11 @@ public class MetadataWildcard implements DedicatedServerModInitializer {
 	/// Only look up metadata with these prefixes.
 	public static final CopyOnWriteArraySet<String> prefixStrings = new CopyOnWriteArraySet<String>();
 	/// A phase after default phase.
-	static final Identifier WILDCARD_PHASE = tryParse("$lowercase");
+	private static final Identifier WILDCARD_PHASE = tryParse("$lowercase");
 	/// `foo.bar.baz.qux` -> `qux`
 	///
 	/// `foo.bar.baz.*` -> `baz.*`
-	static final String regex = "[^\\.]+\\.?\\*?$";
+	private static final String regex = "[^\\.]+\\.?\\*?$";
 
 	static {
 		OfflineOptionRequestEvent.EVENT.addPhaseOrdering(DEFAULT_PHASE, WILDCARD_PHASE);
@@ -56,10 +56,11 @@ public class MetadataWildcard implements DedicatedServerModInitializer {
 	///
 	/// @param key key of metadata
 	/// @return `true` for empty, and `false` for recursion continues
-	static boolean isEmpty(String key) {
+	private static boolean isEmpty(String key) {
 		return "*".equals(key) || prefixStrings.parallelStream().noneMatch(key::startsWith);
 	}
 
+	@Override
 	public void onInitializeServer() {
 		var configDirectory = getInstance().getConfigDir().resolve("$capital");
 		var prefixConfig = configDirectory.resolve("prefix.txt");
