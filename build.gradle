@@ -17,7 +17,7 @@ tasks.withType JavaCompile configureEach {
 	options.deprecation = true
 	options.encoding = 'UTF-8'
 	options.listFiles = true
-	options.release = 15
+	options.release = 8
 }
 
 var DEVELOPER_LOWERCASE = 'qwertycxz'
@@ -229,7 +229,6 @@ spotless {
 			'LambdaIsMethodReference',
 			'LambdaReturnsSingleStatement',
 			'LiteralsFirstInComparisons',
-			'LocalVariableTypeInference',
 			'ModifierOrder',
 			'ObjectEqualsForPrimitives',
 			'ObjectsHashCodePrimitive',

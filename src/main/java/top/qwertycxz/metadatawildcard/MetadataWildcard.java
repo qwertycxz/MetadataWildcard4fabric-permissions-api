@@ -12,6 +12,7 @@ import static net.fabricmc.loader.api.FabricLoader.getInstance;
 import static net.minecraft.resources.Identifier.tryParse;
 
 import java.io.IOException;
+import java.nio.file.Path;
 import java.util.concurrent.CopyOnWriteArraySet;
 import me.lucko.fabric.api.permissions.v0.OfflineOptionRequestEvent;
 import me.lucko.fabric.api.permissions.v0.OptionRequestEvent;
@@ -62,8 +63,8 @@ public class MetadataWildcard implements DedicatedServerModInitializer {
 
 	@Override
 	public void onInitializeServer() {
-		var configDirectory = getInstance().getConfigDir().resolve("$capital");
-		var prefixConfig = configDirectory.resolve("prefix.txt");
+		Path configDirectory = getInstance().getConfigDir().resolve("$capital");
+		Path prefixConfig = configDirectory.resolve("prefix.txt");
 		try {
 			try {
 				prefixConfig.toRealPath();
