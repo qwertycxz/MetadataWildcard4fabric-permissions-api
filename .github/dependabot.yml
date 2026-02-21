@@ -6,6 +6,9 @@ registries:
   fabric:
     type: maven-repository
     url: https://maven.fabricmc.net
+  gradle:
+    type: maven-repository
+    url: https://plugins.gradle.org/m2
 updates:
   - assignees: [qwertycxz]
     commit-message:
