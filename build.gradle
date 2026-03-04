@@ -266,6 +266,7 @@ spotless {
 		importOrder()
 		removeUnusedImports()
 		setLineEndings 'UNIX'
+		tableTestFormatter()
 		target 'src/**/*.java'
 	}
 	json {
