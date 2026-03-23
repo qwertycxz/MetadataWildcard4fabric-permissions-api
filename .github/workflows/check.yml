@@ -11,9 +11,7 @@ jobs:
           java-version: 25
       - run: gradle check
 on:
-  pull_request:
-    branches: [master]
-  push:
-    branches: [master]
+  - pull_request
+  - push
 permissions:
   contents: read

@@ -27,7 +27,8 @@ jobs:
           modrinth-token: ${{ secrets.MODRINTH_TOKEN }}
 on:
   release:
-    types: [created]
+    types:
+      - created
 permissions:
   contents: read
   packages: write
