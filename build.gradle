@@ -13,13 +13,6 @@ androidGitVersion {
 	prefix = 'v'
 }
 
-tasks.withType JavaCompile configureEach {
-	options.deprecation = true
-	options.encoding = 'UTF-8'
-	options.listFiles = true
-	options.release = 8
-}
-
 var DEVELOPER_LOWERCASE = 'qwertycxz'
 var DEVELOPER_NAME = 'qwerty吃小庄'
 var DEVELOPER_SCM = "github.com/${DEVELOPER_LOWERCASE}"
