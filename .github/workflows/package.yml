@@ -23,13 +23,13 @@ jobs:
         uses: Kir-Antipov/mc-publish@995edadc13559a8b28d0b7e6571229f067ec7659
         with:
           curseforge-token: ${{ secrets.CURSEFORGE_TOKEN }}
-          files: obfuscated/build/libs/!(*-@(dev|sources|javadoc)).jar
+          files: obfuscated/build/libs/*.jar
           modrinth-token: ${{ secrets.MODRINTH_TOKEN }}
       - name: MC-Publish v3.3.0
         uses: Kir-Antipov/mc-publish@995edadc13559a8b28d0b7e6571229f067ec7659
         with:
           curseforge-token: ${{ secrets.CURSEFORGE_TOKEN }}
-          files: unobfuscated/build/libs/!(*-@(dev|sources|javadoc)).jar
+          files: unobfuscated/build/libs/*.jar
           modrinth-token: ${{ secrets.MODRINTH_TOKEN }}
 on:
   release:
