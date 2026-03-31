@@ -2,12 +2,16 @@ plugins {
 	id 'net.fabricmc.fabric-loom-remap' version '1.15-SNAPSHOT'
 }
 
+configurations.configureEach {
+	resolutionStrategy.force 'com.mojang:authlib:6.0.58'
+}
+
 dependencies {
 	mappings loom.officialMojangMappings()
-	minecraft 'com.mojang:minecraft:1.21.7'
+	minecraft 'com.mojang:minecraft:1.21.11'
 	modImplementation 'me.lucko:fabric-permissions-api:0.4.1'
 	modImplementation 'net.fabricmc:fabric-loader:0.18.4'
-	modImplementation fabricApi.module('fabric-api-base', '0.129.0+1.21.7')
+	modImplementation fabricApi.module('fabric-api-base', '0.141.3+1.21.11')
 }
 
 loom {
