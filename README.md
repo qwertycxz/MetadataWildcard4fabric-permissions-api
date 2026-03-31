@@ -51,10 +51,9 @@ This mod works like when [`apply-wildcards`](https://luckperms.net/wiki/Configur
 
 ## Requirement
 
-* Java ⩾ 15
 * Minecraft ⩾ 1.16.5
 * Fabric
-* fabric-permissions-api ⩾ 0.3
+* fabric-permissions-api ⩾ 0.3.1
 * Any permission mod supports [fabric-permissions-api](https://github.com/lucko/fabric-permissions-api 'GitHub') (e.g. [LuckPerms](https://github.com/lucko/LuckPerms 'GitHub'))
 
 ## Usage
