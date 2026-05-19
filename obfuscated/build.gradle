@@ -9,7 +9,7 @@ configurations.configureEach {
 dependencies {
 	mappings loom.officialMojangMappings()
 	minecraft 'com.mojang:minecraft:1.21.11'
-	modImplementation 'me.lucko:fabric-permissions-api:0.4.1'
+	modImplementation 'me.lucko:fabric-permissions-api:0.7.0'
 	modImplementation 'net.fabricmc:fabric-loader:0.19.2'
 	modImplementation fabricApi.module('fabric-api-base', '0.141.3+1.21.11')
 }
