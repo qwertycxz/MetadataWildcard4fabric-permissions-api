@@ -21,6 +21,7 @@ import net.fabricmc.api.DedicatedServerModInitializer;
 import net.minecraft.resources.Identifier;
 
 /// An addon for fabric-permissions-api that enables wildcard support in metadata.
+///
 /// # Example
 /// ```java
 /// MetadataWildcard.prefixStrings.add("foo.bar");
@@ -28,18 +29,18 @@ import net.minecraft.resources.Identifier;
 /// When checking a key like `foo.bar.baz.qux`:
 /// 1. First checks for an exact match
 /// 2. If not found, checks parent keys with wildcards in descending order:
-/// 	* `foo.bar.baz.*`
-/// 	* `foo.bar.*`
+///    * `foo.bar.baz.*`
+///    * `foo.bar.*`
 /// 3. Returns unset if no match is found
 public class MetadataWildcard implements DedicatedServerModInitializer {
 	/// Only look up metadata with these prefixes.
 	public static final CopyOnWriteArraySet<String> prefixStrings = new CopyOnWriteArraySet<String>();
-	/// A phase after default phase.
-	private static final Identifier WILDCARD_PHASE = tryParse("$lowercase");
 	/// `foo.bar.baz.qux` -> `qux`
 	///
 	/// `foo.bar.baz.*` -> `baz.*`
 	private static final String regex = "[^\\.]+\\.?\\*?$";
+	/// A phase after default phase.
+	private static final Identifier WILDCARD_PHASE = tryParse("$lowercase");
 
 	static {
 		OfflineOptionRequestEvent.EVENT.addPhaseOrdering(DEFAULT_PHASE, WILDCARD_PHASE);

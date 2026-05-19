@@ -1,5 +1,5 @@
 plugins {
-	id 'com.diffplug.spotless' version '8.4.0'
+	id 'com.diffplug.spotless' version '8.5.0'
 	id 'com.gladed.androidgitversion' version '0.4.14'
 	id 'com.vanniktech.maven.publish' version '0.36.0' apply false
 	id 'net.raphimc.class-token-replacer' version '1.1.7' apply false
@@ -140,6 +140,7 @@ var ECLIPSE = '''
 	org.eclipse.jdt.core.formatter.comment.format_line_comments = false
 	org.eclipse.jdt.core.formatter.comment.indent_parameter_description = true
 	org.eclipse.jdt.core.formatter.comment.indent_tag_description = true
+	org.eclipse.jdt.core.formatter.comment.insert_new_line_for_parameter = do not insert
 	org.eclipse.jdt.core.formatter.comment.line_length = 255
 	org.eclipse.jdt.core.formatter.comment.new_lines_at_block_boundaries = false
 	org.eclipse.jdt.core.formatter.continuation_indentation = 1
@@ -252,14 +253,14 @@ spotless {
 			'UsePredefinedStandardCharset',
 			'UseStringIsEmpty',
 			'UseTextBlocks',
-		]) includeDraft true sourceCompatibility '25'
+		]) includeDraft true sourceCompatibility '26'
 		eclipse() configProperties ECLIPSE sortMembersDoNotSortFields false sortMembersEnabled true sortMembersVisibilityOrderEnabled true
 		forbidModuleImports()
 		forbidWildcardImports()
 		importOrder()
 		removeUnusedImports()
 		setLineEndings 'UNIX'
-		tableTestFormatter()
+		tableTestFormatter() // withIndentStyle 'tab'
 		target 'src/**/*.java'
 	}
 	json {
