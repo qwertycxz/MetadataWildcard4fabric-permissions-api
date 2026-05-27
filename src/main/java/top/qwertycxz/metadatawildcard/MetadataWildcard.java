@@ -4,6 +4,7 @@ import static java.nio.charset.StandardCharsets.UTF_8;
 import static java.nio.file.Files.createDirectories;
 import static java.nio.file.Files.lines;
 import static java.nio.file.Files.write;
+import static java.util.Objects.requireNonNull;
 import static java.util.Optional.empty;
 import static java.util.concurrent.CompletableFuture.completedFuture;
 import static java.util.stream.Collectors.toSet;
@@ -19,6 +20,8 @@ import me.lucko.fabric.api.permissions.v0.OfflineOptionRequestEvent;
 import me.lucko.fabric.api.permissions.v0.OptionRequestEvent;
 import net.fabricmc.api.DedicatedServerModInitializer;
 import net.minecraft.resources.Identifier;
+import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.Nullable;
 
 /// An addon for fabric-permissions-api that enables wildcard support in metadata.
 ///
@@ -32,6 +35,7 @@ import net.minecraft.resources.Identifier;
 ///    * `foo.bar.baz.*`
 ///    * `foo.bar.*`
 /// 3. Returns unset if no match is found
+@NullMarked
 public class MetadataWildcard implements DedicatedServerModInitializer {
 	/// Only look up metadata with these prefixes.
 	public static final CopyOnWriteArraySet<String> prefixStrings = new CopyOnWriteArraySet<String>();
@@ -40,7 +44,7 @@ public class MetadataWildcard implements DedicatedServerModInitializer {
 	/// `foo.bar.baz.*` -> `baz.*`
 	private static final String regex = "[^\\.]+\\.?\\*?$";
 	/// A phase after default phase.
-	private static final Identifier WILDCARD_PHASE = tryParse("$lowercase");
+	private static final Identifier WILDCARD_PHASE = requireNonNull(tryParse("$lowercase"));
 
 	static {
 		OfflineOptionRequestEvent.EVENT.addPhaseOrdering(DEFAULT_PHASE, WILDCARD_PHASE);
@@ -59,8 +63,8 @@ public class MetadataWildcard implements DedicatedServerModInitializer {
 	///
 	/// @param key key of metadata
 	/// @return `true` for empty, and `false` for recursion continues
-	private static boolean isEmpty(String key) {
-		return "*".equals(key) || prefixStrings.parallelStream().noneMatch(key::startsWith);
+	private static boolean isEmpty(@Nullable String key) {
+		return key == null || "*".equals(key) || prefixStrings.parallelStream().noneMatch(key::startsWith);
 	}
 
 	@Override
