@@ -97,6 +97,13 @@ subprojects {
 			}
 		}
 	}
+	var JAVA = project.properties['java'] as int
+	tasks.withType JavaCompile configureEach {
+		options.deprecation = true
+		options.encoding = 'UTF-8'
+		options.listFiles = true
+		options.release = JAVA
+	}
 	var MINECRAFT = project.properties['minecraft']
 	processResources {
 		filesMatching('fabric.mod.json') {
