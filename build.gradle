@@ -198,11 +198,24 @@ var ECLIPSE = '''
 '''
 
 spotless {
-	// flexmark {
-	// 	flexmark()
-	// 	setLineEndings 'UNIX'
-	// 	target '*.md'
-	// }
+	flexmark {
+		flexmark() formatterOptions(
+			APPEND_TRANSFERRED_REFERENCES: true,
+			ATX_HEADER_TRAILING_MARKER: 'REMOVE',
+			FENCED_CODE_MARKER_TYPE: 'BACK_TICK',
+			KEEP_HARD_LINE_BREAKS: false,
+			KEEP_SOFT_LINE_BREAKS: false,
+			LIST_ADD_BLANK_LINE_BEFORE: true,
+			LIST_BULLET_MARKER: 'ASTERISK',
+			LIST_NUMBERED_MARKER: 'DOT',
+			LIST_SPACING: 'TIGHT',
+			MAX_BLANK_LINES: 1,
+			REFERENCE_PLACEMENT: 'DOCUMENT_BOTTOM',
+			SKIP_CHAR_ESCAPE: true,
+		)
+		setLineEndings 'UNIX'
+		target '*.md'
+	}
 	groovyGradle {
 		greclipse() configProperties ECLIPSE
 		importOrder()
