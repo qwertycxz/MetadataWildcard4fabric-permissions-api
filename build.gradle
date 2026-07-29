@@ -267,7 +267,6 @@ spotless {
 		forbidModuleImports()
 		forbidWildcardImports()
 		importOrder()
-		princeOfSpace() indentSize 1 indentStyle 'TABS' lineLength 256 trailingCommas true javaLanguageLevel 25
 		removeUnusedImports()
 		setLineEndings 'UNIX'
 		tableTestFormatter() // withIndentStyle 'tab'

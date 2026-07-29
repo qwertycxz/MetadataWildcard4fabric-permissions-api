@@ -12,6 +12,7 @@ import static me.lucko.fabric.api.permissions.v0.Options.get;
 import static net.fabricmc.fabric.api.event.Event.DEFAULT_PHASE;
 import static net.fabricmc.loader.api.FabricLoader.getInstance;
 import static net.minecraft.resources.Identifier.tryParse;
+
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.concurrent.CopyOnWriteArraySet;
@@ -48,16 +49,12 @@ public class MetadataWildcard implements DedicatedServerModInitializer {
 	static {
 		OfflineOptionRequestEvent.EVENT.addPhaseOrdering(DEFAULT_PHASE, WILDCARD_PHASE);
 		OfflineOptionRequestEvent.EVENT.register(WILDCARD_PHASE, (uuid, key) -> {
-			if (isEmpty(key)) {
-				return completedFuture(empty());
-			}
+			if (isEmpty(key)) return completedFuture(empty());
 			return get(uuid, key.replaceAll(regex, "*"));
 		});
 		OptionRequestEvent.EVENT.addPhaseOrdering(DEFAULT_PHASE, WILDCARD_PHASE);
 		OptionRequestEvent.EVENT.register(WILDCARD_PHASE, (source, key) -> {
-			if (isEmpty(key)) {
-				return empty();
-			}
+			if (isEmpty(key)) return empty();
 			return get(source, key.replaceAll(regex, "*"));
 		});
 	}
@@ -77,12 +74,14 @@ public class MetadataWildcard implements DedicatedServerModInitializer {
 		try {
 			try {
 				prefixConfig.toRealPath();
-			} catch (IOException e) {
+			}
+			catch (IOException e) {
 				createDirectories(configDirectory);
 				write(prefixConfig, "minecraft.selector\n".getBytes(UTF_8));
 			}
 			prefixStrings.addAll(lines(prefixConfig).parallel().collect(toSet()));
-		} catch (IOException e) {
+		}
+		catch (IOException e) {
 			throw new RuntimeException("Failed to load config file for mod $name");
 		}
 	}
