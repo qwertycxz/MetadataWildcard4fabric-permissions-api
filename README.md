@@ -71,10 +71,11 @@ minecraft.selector
 ```
 
 When checking a key like `minecraft.selector.foo.bar`:
+
 1. First checks for an exact match
 2. If not found, checks parent keys with wildcards in descending order:
-	* `minecraft.selector.foo.*`
-	* `minecraft.selector.*`
+   * `minecraft.selector.foo.*`
+   * `minecraft.selector.*`
 3. Returns unset if no match is found
 
 ### For modders

@@ -1,5 +1,5 @@
 plugins {
-	id 'com.diffplug.spotless' version '8.10.3'
+	id 'com.diffplug.spotless' version '8.10.4'
 	id 'com.gladed.androidgitversion' version '0.4.14'
 	id 'com.vanniktech.maven.publish' version '0.37.0' apply false
 	id 'net.raphimc.class-token-replacer' version '1.1.7' apply false
@@ -108,22 +108,22 @@ subprojects {
 	processResources {
 		filesMatching('fabric.mod.json') {
 			expand(
-			central: "https://central.sonatype.com/artifact/${GROUP}/${MOD_LOWERCASE}",
-			description: DESCRIPTION,
-			developer: DEVELOPER_NAME,
-			github: DEVELOPER_GITHUB,
-			homepage: HOMEPAGE,
-			id: MOD_LOWERCASE,
-			issue: ISSUE,
-			kofi: KO_FI,
-			license: LICENSE,
-			minecraft: MINECRAFT,
-			modrinth: MODRINTH,
-			name: MOD_NAME,
-			schema: '''schemaVersion": 1,
+				central: "https://central.sonatype.com/artifact/${GROUP}/${MOD_LOWERCASE}",
+				description: DESCRIPTION,
+				developer: DEVELOPER_NAME,
+				github: DEVELOPER_GITHUB,
+				homepage: HOMEPAGE,
+				id: MOD_LOWERCASE,
+				issue: ISSUE,
+				kofi: KO_FI,
+				license: LICENSE,
+				minecraft: MINECRAFT,
+				modrinth: MODRINTH,
+				name: MOD_NAME,
+				schema: '''schemaVersion": 1,
 	"$schema''',
-			scm: MOD_GITHUB,
-			version: VERSION,
+				scm: MOD_GITHUB,
+				version: VERSION,
 			)
 		}
 	}
@@ -196,11 +196,11 @@ var ECLIPSE = '''
 '''
 
 spotless {
-	// flexmark {
-	// 	flexmark()
-	// 	setLineEndings 'UNIX'
-	// 	target '*.md'
-	// }
+	flexmark {
+		flexmark()
+		setLineEndings 'UNIX'
+		target '*.md'
+	}
 	groovyGradle {
 		greclipse() configProperties ECLIPSE
 		importOrder()
